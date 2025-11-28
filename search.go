@@ -40,3 +40,45 @@ func recursiveBinarySearch(s []int, left int, right int, target int) int {
 		return recursiveBinarySearch(s, m+1, right, target)
 	}
 }
+
+func firstOccuranceBinarySearch(s []int, target int) int {
+	firstOccurance := -1
+	left := 0
+	right := len(s) - 1
+
+	for left <= right {
+		m := (left + right) / 2
+
+		if s[m] == target {
+			firstOccurance = m
+			right = m - 1
+		} else if s[m] < target {
+			left = m + 1
+		} else if s[m] > target {
+			right = m - 1
+		}
+	}
+
+	return firstOccurance
+}
+
+func lastOccuranceBinarySearch(s []int, target int) int {
+	lastOccurance := -1
+	left := 0
+	right := len(s) - 1
+
+	for left <= right {
+		m := (left + right) / 2
+
+		if s[m] == target {
+			lastOccurance = m
+			left = m + 1
+		} else if s[m] < target {
+			left = m + 1
+		} else if s[m] > target {
+			right = m - 1
+		}
+	}
+
+	return lastOccurance
+}
