@@ -26,3 +26,17 @@ func binarySearch(s []int, target int) int {
 	}
 	return -1
 }
+
+func recursiveBinarySearch(s []int, left int, right int, target int) int {
+	m := (left + right) / 2
+
+	if left > right {
+		return -1
+	} else if target == m {
+		return m
+	} else if target < m {
+		return recursiveBinarySearch(s, left, m-1, target)
+	} else {
+		return recursiveBinarySearch(s, m+1, right, target)
+	}
+}

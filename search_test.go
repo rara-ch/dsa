@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestBinarySearch(t *testing.T) {
+func TestSearch(t *testing.T) {
 	basicArray := []int{0, 1, 2, 3, 4, 5, 6}
 
 	type inputs struct {
@@ -52,9 +52,19 @@ func TestBinarySearch(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		got := binarySearch(c.inputs.array, c.inputs.target)
-		if got != c.expected {
-			t.Errorf("results do not match: got %v, expected %v", got, c.expected)
+		result := linearSearch(c.inputs.array, c.expected)
+		if result != c.expected {
+			t.Errorf("linear search results do not match: got %v, expected %v", result, c.expected)
+		}
+
+		result = binarySearch(c.inputs.array, c.inputs.target)
+		if result != c.expected {
+			t.Errorf("iterative binary search results do not match: got %v, expected %v", result, c.expected)
+		}
+
+		result = recursiveBinarySearch(c.inputs.array, 0, len(c.inputs.array)-1, c.inputs.target)
+		if result != c.expected {
+			t.Errorf("recursive binary search results do not match: got %v, expected %v", result, c.expected)
 		}
 	}
 }
