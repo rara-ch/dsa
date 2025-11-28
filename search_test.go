@@ -140,5 +140,78 @@ func TestLastOccuranceBinarySearch(t *testing.T) {
 			t.Errorf("last occurance binary search error: got %v, expected %v", result, c.expected)
 		}
 	}
+}
+
+func TestLowerBoundBinarySearch(t *testing.T) {
+	cases := []struct {
+		inputs   inputs
+		expected int
+	}{
+		{
+			inputs: inputs{
+				array:  []int{},
+				target: 1,
+			},
+			expected: -1,
+		},
+		{
+			inputs: inputs{
+				array:  []int{1, 2, 2, 2, 2, 2, 3},
+				target: 2,
+			},
+			expected: 6,
+		},
+		{
+			inputs: inputs{
+				array:  []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+				target: 0,
+			},
+			expected: -1,
+		},
+	}
+
+	for _, c := range cases {
+		result := lowerBoundBinarySearch(c.inputs.array, c.inputs.target)
+		if result != c.expected {
+			t.Errorf("lower bound binary search error: got %v, expected %v", result, c.expected)
+		}
+	}
+
+}
+
+func TestUpperBoundBinarySearch(t *testing.T) {
+	cases := []struct {
+		inputs   inputs
+		expected int
+	}{
+		{
+			inputs: inputs{
+				array:  []int{},
+				target: 1,
+			},
+			expected: -1,
+		},
+		{
+			inputs: inputs{
+				array:  []int{1, 2, 2, 2, 2, 2, 3},
+				target: 2,
+			},
+			expected: 0,
+		},
+		{
+			inputs: inputs{
+				array:  []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+				target: 0,
+			},
+			expected: -1,
+		},
+	}
+
+	for _, c := range cases {
+		result := upperBoundBinarySearch(c.inputs.array, c.inputs.target)
+		if result != c.expected {
+			t.Errorf("upper bound binary search error: got %v, expected %v", result, c.expected)
+		}
+	}
 
 }

@@ -82,3 +82,41 @@ func lastOccuranceBinarySearch(s []int, target int) int {
 
 	return lastOccurance
 }
+
+func lowerBoundBinarySearch(s []int, target int) int {
+	bound := -1
+	left := 0
+	right := len(s) - 1
+
+	for left <= right {
+		m := (left + right) / 2
+
+		if s[m] <= target {
+			left = m + 1
+		} else if s[m] > target {
+			bound = m
+			right = m - 1
+		}
+	}
+
+	return bound
+}
+
+func upperBoundBinarySearch(s []int, target int) int {
+	bound := -1
+	left := 0
+	right := len(s) - 1
+
+	for left <= right {
+		m := (left + right) / 2
+
+		if s[m] >= target {
+			right = m - 1
+		} else if s[m] < target {
+			bound = m
+			left = m + 1
+		}
+	}
+
+	return bound
+}
