@@ -120,3 +120,97 @@ func upperBoundBinarySearch(s []int, target int) int {
 
 	return bound
 }
+
+// Tested on LeetCode (Problem 34)
+func firstLastBinarySearch(s []int, target int) (int, int) {
+	left := 0
+	right := len(s) - 1
+	pivot := -1
+
+	for left <= right {
+		m := (left + right) / 2
+
+		if s[m] == target {
+			pivot = m
+			break
+		} else if s[m] < target {
+			left = m + 1
+		} else {
+			right = m - 1
+		}
+	}
+
+	if pivot == -1 {
+		return -1, -1
+	}
+
+	left = 0
+	right = pivot - 1
+	firstOccurance := pivot
+
+	for left <= right {
+		m := (left + right) / 2
+
+		if s[m] == target {
+			firstOccurance = m
+			right = m - 1
+		} else if s[m] > target {
+			right = m - 1
+		} else {
+			left = m + 1
+		}
+	}
+
+	left = pivot + 1
+	right = len(s) - 1
+	lastOccurance := pivot
+
+	for left <= right {
+		m := (left + right) / 2
+
+		if s[m] == target {
+			lastOccurance = m
+			left = m + 1
+		} else if s[m] > target {
+			right = m - 1
+		} else {
+			left = m + 1
+		}
+	}
+
+	return firstOccurance, lastOccurance
+}
+
+// Tested on LeetCode (Problem 162)
+func findPeakElement(nums []int) int {
+	l := 0
+	r := len(nums) - 1
+
+	for l <= r {
+		m := (l + r) / 2
+
+		lessLeft := false
+		lessRight := false
+
+		if (m+1) > (len(nums)-1) || nums[m] > nums[m+1] {
+			lessRight = true
+		}
+
+		if (m-1) < 0 || nums[m] > nums[m-1] {
+			lessLeft = true
+		}
+
+		if lessLeft && lessRight {
+			return m
+		} else if lessLeft {
+			l = m + 1
+		} else {
+			r = m - 1
+		}
+	}
+	return 0
+}
+
+// func searchMatrix(matrix [][]int, target int) bool {
+
+// }
