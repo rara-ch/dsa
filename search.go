@@ -1,5 +1,9 @@
 package main
 
+import (
+	"math"
+)
+
 func linearSearch(s []int, target int) int {
 	for i := 0; i < len(s); i++ {
 		if s[i] == target {
@@ -211,6 +215,24 @@ func findPeakElement(nums []int) int {
 	return 0
 }
 
-// func searchMatrix(matrix [][]int, target int) bool {
+func twoCrystalBallProblem(heights []bool) int {
+	i := 0
+	n := len(heights)
+	var j int
+	for i < n {
+		j = i
+		if heights[i] {
+			break
+		}
+		i += int(math.Sqrt(float64(n)))
+	}
 
-// }
+	for j < n {
+		if heights[j] {
+			return j
+		}
+		j++
+	}
+
+	return -1
+}
